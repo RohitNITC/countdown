@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<body  >
+
+<canvas id="myCanvas" width="900" height="150" style="border:1px solid #FF00FF;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<p id="1"></p>
+<script>
+var dt=new Date();
+var dt1=new Date("Feb 24 2019 05:30");
+var t=Math.trunc(dt1.getTime()/1000)-Math.trunc(dt.getTime()/1000);
+t--;
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var start=1.5*Math.PI;
+var end=1*Math.PI;
+var add=(2*Math.PI)/60;
+var adh=(2*Math.PI)/24;
+var i=Math.floor(t % 3600 % 60),j=Math.floor(t % 3600 / 60),k=Math.floor(t / 3600%24),l=Math.floor(t / (3600*24));
+document.getElementById("1").innerHTML=l;
+ctx.font='900 50px Arial';
+ctx.lineWidth   = 8;
+
+sec();
+min();
+hour();
+
+function sec(){
+    
+ctx.clearRect(600,0,900,150);
+ctx.strokeStyle = "black";
+ctx.beginPath();
+ctx.arc(750,75,65,start,start-(60-i)*add,true);
+
+ctx.stroke();
+ctx.arc(750,75,60,start,start-(59-i)*add-add,false);
+
+
+ctx.strokeStyle = "brown";
+ctx.beginPath();
+//ctx.arc(750,75,60,start-(60-i)*add,start,false);
+ctx.fillText(i--,730, 81.5);
+ctx.stroke();
+
+if(i==-1){
+i=59;
+}
+if(i==58){
+    min();
+}
+//setTimeout(sec, 1000);
+}
+
+function min(){
+ctx.clearRect(300, 0, 600, 150);
+ctx.clearRect(600,0,900,150);
+ctx.strokeStyle = "black";
+ctx.beginPath();
+ctx.arc(750,75,65,start,start-(60-i)*add,true);
+ctx.fillText(i+1,730, 81.5);
+ctx.stroke();
+ctx.strokeStyle = "brown";
+ctx.beginPath();
+ctx.arc(750,75,60,start+add-(60-i)*add,start,true);
+ctx.stroke();
+ctx.strokeStyle = "black";
+ctx.beginPath();
+ctx.arc(450,75,65,start,start-(60-j)*add,true);
+ctx.fillText(j--,430, 81.5);
+ctx.stroke();
+ctx.strokeStyle = "brown";
+ctx.beginPath();
+ctx.arc(450,75,60,start+add-(60-j)*add,start,true);
+ctx.stroke();
+if(j==-1){
+j=59;
+}
+
+}
+function hour(){
+ctx.clearRect(0,0,300,150);
+ctx.strokeStyle = "black";
+ctx.beginPath();
+ctx.arc(150,75,65,start,start-(60-k)*add,true);
+ctx.fillText(k--,130, 81.5);
+ctx.stroke();
+ctx.strokeStyle = "brown";
+ctx.beginPath();
+ctx.arc(150,75,60,start+add-(60-k)*add,start,true);
+ctx.stroke();
+if(k==-1){
+    k=24;
+}
+}
+function hor(){
+
+ctx.clearRect(600,0,900,150);
+ctx.strokeStyle = "black";
+ctx.beginPath();
+ctx.arc(750,75,65,start,start-(24-k)*adh,true);
+ctx.fillText(k--,730, 81.5);
+ctx.stroke();
+ctx.strokeStyle = "brown";
+ctx.beginPath();
+ctx.arc(750,75,60,start+adh-(24-k)*adh,start,true);
+ctx.stroke();
+}
+</script> 
+
+</body>
+</html>
